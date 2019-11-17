@@ -2,12 +2,47 @@
 <html>
   <body>
     <div id="app">
+      <h1>Visvalingam</h1>
+      <h2>canvas width <span id="canvas-width"></span></h2>
+      <h2># points <span id="points-length"></span></h2>
       <canvas width="640" height="320" id="canvas"></canvas>
     </div>
 
     <script type="module">
       import aapl from './aapl.js'
       import { simplify } from './simplify.js'
+      import { clearCanvas, useChart } from './chart.js'
+
+      function sleep(ms) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve()
+          }, ms)
+        })
+      }
+
+      const canvas = document.querySelector('#canvas')
+      const canvasWidthEl = document.querySelector('#canvas-width')
+      const pointsLengthEl = document.querySelector('#points-length')
+
+      async function run() {
+        canvasWidthEl.innerHTML = canvas.width
+
+        let stocks = aapl
+        try {
+          while (stocks.length > 2) {
+            stocks = simplify(stocks)
+            clearCanvas(canvas)
+            useChart(canvas, stocks)
+            pointsLengthEl.innerHTML = stocks.length
+            await sleep(20)
+          }
+        } catch (err) {
+          console.error(err)
+        }
+      }
+
+      run()
     </script>
   </body>
 </html>

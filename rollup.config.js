@@ -13,4 +13,14 @@ export default [
 
     plugins,
   },
+  {
+    input: 'src/chart.ts',
+
+    output: {
+      file: 'public/chart.js',
+      format: 'esm',
+    },
+
+    plugins,
+  },
 ]
