@@ -1,0 +1,1 @@
+# Implementation of Visvalingam’s algorithm
