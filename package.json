@@ -5,6 +5,7 @@
     }
   },
   "scripts": {
+    "lint:fix": "prettier --write {src,test}/**/*.ts",
     "test": "jest",
     "test:watch": "jest --watch"
   },
