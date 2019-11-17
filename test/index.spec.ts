@@ -1,4 +1,4 @@
-import { addOneToNumber } from ".."
+import { addOneToNumber } from '../src'
 
 describe('addOneToNumber', () => {
   it('takes a number as an input and increments it by one', () => {
