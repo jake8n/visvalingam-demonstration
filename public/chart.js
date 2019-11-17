@@ -31,6 +31,7 @@ function useChart(canvas, points) {
   })
   var context = canvas.getContext('2d')
   if (context === null) throw new Error('Canvas context is null')
+  context.lineCap = 'square'
   context.strokeStyle = 'blue'
   context.beginPath()
   context.moveTo(coordinates[0].x, coordinates[0].y)
