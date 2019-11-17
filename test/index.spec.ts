@@ -1,4 +1,4 @@
-import { Point, simplify } from '../src/index'
+import { calculateArea, Point, simplify } from '../src/index'
 
 describe('simplify', () => {
   let points: Point[], simplified: Point[]
@@ -17,8 +17,42 @@ describe('simplify', () => {
       expect(simplified.length).toBeLessThan(points.length)
     })
 
-    it('removes the least important coordiate, accordint to the algorithm', () => {
+    it('removes the least important point, according to the algorithm', () => {
       expect(simplified.indexOf(points[1])).toEqual(-1)
     })
+
+    it('does not simplify when the input is at minimum length', () => {
+      expect(simplify(simplified).length).toEqual(simplified.length)
+    })
+  })
+
+  describe('longer input', () => {
+    beforeAll(() => {
+      points = [
+        { x: 0, y: 0 },
+        { x: 1, y: 5 },
+        { x: 2, y: 2 },
+        { x: 3, y: 3 },
+      ]
+      simplified = simplify(points)
+    })
+
+    it('removes the first least important point, according to the algorithm', () => {
+      expect(simplified.indexOf(points[2])).toEqual(-1)
+    })
+  })
+})
+
+describe('calculateArea', () => {
+  let A: Point, B: Point, C: Point
+
+  beforeAll(() => {
+    A = { x: 0, y: 0 }
+    B = { x: 1, y: 0 }
+    C = { x: 1, y: 1 }
+  })
+
+  it('calculates area between three coordinates', () => {
+    expect(calculateArea(A, B, C)).toEqual(0.5)
   })
 })
