@@ -43,6 +43,7 @@ export function useChart(canvas: HTMLCanvasElement, points: Point[]): void {
 
   if (context === null) throw new Error('Canvas context is null')
 
+  context.lineCap = 'square'
   context.strokeStyle = 'blue'
 
   context.beginPath()

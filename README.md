@@ -1,1 +1,1 @@
-# Implementation of Visvalingam’s algorithm
+[Link](https://jakepatterson.github.io/visvalingam-demonstration/)
