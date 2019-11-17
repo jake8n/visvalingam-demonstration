@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "lib": ["dom", "esnext"],
+    "noUnusedLocals": true,
+    // "noUnusedParameters": true,
     "strict": true
   }
 }

@@ -1,4 +1,4 @@
-import { calculateArea, Point, simplify } from '../src/index'
+import { calculateArea, Point, simplify } from '../src/simplify'
 
 describe('simplify', () => {
   let points: Point[], simplified: Point[]
@@ -39,6 +39,10 @@ describe('simplify', () => {
 
     it('removes the first least important point, according to the algorithm', () => {
       expect(simplified.indexOf(points[2])).toEqual(-1)
+    })
+
+    it('removes the next least important point when run again', () => {
+      expect(simplify(simplified).indexOf(points[1])).toEqual(-1)
     })
   })
 })
