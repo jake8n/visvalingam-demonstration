@@ -23,7 +23,7 @@
     <script type="module">
       import aapl from './public/aapl.js'
       import { simplify } from './public/simplify.js'
-      import { clearCanvas, useChart } from './public/chart.js'
+      import { clearCanvas, getDomain, useChart } from './public/chart.js'
 
       const canvas = document.querySelector('#canvas')
       const canvasWidthEl = document.querySelector('#canvas-width')
@@ -36,6 +36,8 @@
       rangeInput.oninput = handleRangeInput
 
       let stocks = aapl
+      const xDomain = getDomain(aapl, 'x')
+      const yDomain = getDomain(aapl, 'y')
 
       update()
 
@@ -50,8 +52,9 @@
       }
 
       function draw() {
+        console.log(xDomain, yDomain)
         clearCanvas(canvas)
-        useChart(canvas, stocks)
+        useChart(canvas, stocks, xDomain, yDomain)
       }
 
       function updateElements() {
