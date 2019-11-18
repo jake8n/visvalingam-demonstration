@@ -12,7 +12,12 @@ function simplify(points, amount) {
   if (amount === void 0) {
     amount = 1
   }
-  if (points.length - amount < 2 || amount <= 0) return points
+  if (points.length - amount < 2 || amount <= 0)
+    return points.map(function(_a) {
+      var x = _a.x,
+        y = _a.y
+      return { x: x, y: y }
+    })
   var areas = points.map(function(point, i) {
     if (i === 0 || i === points.length - 1) {
       point.area = -1

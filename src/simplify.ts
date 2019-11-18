@@ -14,7 +14,8 @@ export function calculateArea(A: Point, B: Point, C: Point): number {
 }
 
 export function simplify(points: Point[], amount: number = 1): Point[] {
-  if (points.length - amount < 2 || amount <= 0) return points
+  if (points.length - amount < 2 || amount <= 0)
+    return points.map(({ x, y }) => ({ x, y }))
 
   const areas = points.map((point, i) => {
     if (i === 0 || i === points.length - 1) {
