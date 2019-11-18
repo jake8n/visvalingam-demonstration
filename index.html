@@ -24,36 +24,15 @@
       import { simplify } from './public/simplify.js'
       import { clearCanvas, useChart } from './public/chart.js'
 
-      function sleep(ms) {
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve()
-          }, ms)
-        })
-      }
-
       const canvas = document.querySelector('#canvas')
       const canvasWidthEl = document.querySelector('#canvas-width')
       const pointsLengthEl = document.querySelector('#points-length')
 
-      async function run() {
-        canvasWidthEl.innerHTML = canvas.width
+      const stocks = simplify(aapl, aapl.length - canvas.width)
+      useChart(canvas, stocks)
 
-        let stocks = aapl
-        try {
-          while (stocks.length > 2) {
-            stocks = simplify(stocks)
-            clearCanvas(canvas)
-            useChart(canvas, stocks)
-            pointsLengthEl.innerHTML = stocks.length
-            await sleep(20)
-          }
-        } catch (err) {
-          console.error(err)
-        }
-      }
-
-      run()
+      canvasWidthEl.innerHTML = canvas.width
+      pointsLengthEl.innerHTML = stocks.length
     </script>
   </body>
 </html>

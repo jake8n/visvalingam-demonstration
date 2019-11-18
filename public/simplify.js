@@ -8,18 +8,30 @@ function calculateArea(A, B, C) {
   var areaDoubled = Ax * (By - Cy) + Bx * (Cy - Ay) + Cx * (Ay - By)
   return Math.abs(areaDoubled / 2)
 }
-function simplify(points) {
-  if (points.length <= 2) return points
+function simplify(points, amount) {
+  if (amount === void 0) {
+    amount = 1
+  }
+  if (points.length - amount < 2 || amount <= 0) return points
   var areas = points.map(function(point, i) {
-    if (i === 0 || i === points.length - 1) return -1
-    return calculateArea(points[i - 1], points[i], points[i + 1])
+    if (i === 0 || i === points.length - 1) {
+      point.area = -1
+      return point
+    }
+    point.area = calculateArea(points[i - 1], points[i], points[i + 1])
+    return point
   })
-  var areasAscending = areas.slice(1, areas.length - 1).sort(function(a, b) {
-    return a - b
+  var areasAscending = areas.sort(function(a, b) {
+    return a.area && b.area ? a.area - b.area : 0
   })
-  var smallestAreaIndex = areas.indexOf(areasAscending[0])
-  return points.filter(function(point, i) {
-    return i !== smallestAreaIndex
+  areasAscending.splice(2, amount)
+  areasAscending.sort(function(a, b) {
+    return b.x - a.x
+  })
+  return areasAscending.map(function(_a) {
+    var x = _a.x,
+      y = _a.y
+    return { x: x, y: y }
   })
 }
 

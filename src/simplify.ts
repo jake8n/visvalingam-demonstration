@@ -1,6 +1,7 @@
 export interface Point {
   x: number
   y: number
+  area?: number
 }
 
 export function calculateArea(A: Point, B: Point, C: Point): number {
@@ -12,16 +13,25 @@ export function calculateArea(A: Point, B: Point, C: Point): number {
   return Math.abs(areaDoubled / 2)
 }
 
-export function simplify(points: Point[]): Point[] {
-  if (points.length <= 2) return points
+export function simplify(points: Point[], amount: number = 1): Point[] {
+  if (points.length - amount < 2 || amount <= 0) return points
 
   const areas = points.map((point, i) => {
-    if (i === 0 || i === points.length - 1) return -1
+    if (i === 0 || i === points.length - 1) {
+      point.area = -1
+      return point
+    }
 
-    return calculateArea(points[i - 1], points[i], points[i + 1])
+    point.area = calculateArea(points[i - 1], points[i], points[i + 1])
+    return point
   })
-  const areasAscending = areas.slice(1, areas.length - 1).sort((a, b) => a - b)
-  const smallestAreaIndex = areas.indexOf(areasAscending[0])
 
-  return points.filter((point, i) => i !== smallestAreaIndex)
+  const areasAscending = areas.sort((a, b) =>
+    a.area && b.area ? a.area - b.area : 0
+  )
+
+  areasAscending.splice(2, amount)
+  areasAscending.sort((a, b) => b.x - a.x)
+
+  return areasAscending.map(({ x, y }) => ({ x, y }))
 }
