@@ -16,9 +16,7 @@ function getScaleFunction(domain, range) {
     return scale(value, domain, range)
   }
 }
-function useChart(canvas, points) {
-  var xDomain = getDomain(points, 'x')
-  var yDomain = getDomain(points, 'y')
+function useChart(canvas, points, xDomain, yDomain) {
   var xScaleFn = getScaleFunction(xDomain, [0, canvas.width])
   var yScaleFn = getScaleFunction(yDomain, [canvas.height, 0])
   var coordinates = points.map(function(_a) {
@@ -48,4 +46,4 @@ function clearCanvas(canvas) {
   context.clearRect(0, 0, canvas.width, canvas.height)
 }
 
-export { clearCanvas, useChart }
+export { clearCanvas, getDomain, useChart }

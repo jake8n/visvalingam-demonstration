@@ -6,7 +6,7 @@ interface Point {
 type Domain = [number, number]
 type Range = [number, number]
 
-function getDomain(points: Point[], key: 'x' | 'y'): Domain {
+export function getDomain(points: Point[], key: 'x' | 'y'): Domain {
   const values = points.map(point => point[key])
 
   return [Math.min(...values), Math.max(...values)]
@@ -27,10 +27,12 @@ function getScaleFunction(domain: Domain, range: Range): Function {
   }
 }
 
-export function useChart(canvas: HTMLCanvasElement, points: Point[]): void {
-  const xDomain = getDomain(points, 'x')
-  const yDomain = getDomain(points, 'y')
-
+export function useChart(
+  canvas: HTMLCanvasElement,
+  points: Point[],
+  xDomain: Domain,
+  yDomain: Domain
+): void {
   const xScaleFn = getScaleFunction(xDomain, [0, canvas.width])
   const yScaleFn = getScaleFunction(yDomain, [canvas.height, 0])
 
