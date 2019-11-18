@@ -16,6 +16,7 @@
       <h1>Visvalingam demonstration</h1>
       <h2>canvas width <span id="canvas-width"></span> pixels</h2>
       <h2># points <span id="points-length"></span></h2>
+      <div><input id="range" type="range" min="2" /></div>
       <canvas width="720" height="360" id="canvas"></canvas>
     </div>
 
@@ -27,12 +28,36 @@
       const canvas = document.querySelector('#canvas')
       const canvasWidthEl = document.querySelector('#canvas-width')
       const pointsLengthEl = document.querySelector('#points-length')
+      const rangeInput = document.querySelector('#range')
 
-      const stocks = simplify(aapl, aapl.length - canvas.width)
-      useChart(canvas, stocks)
+      rangeInput.min = 2
+      rangeInput.max = aapl.length
+      rangeInput.value = aapl.length
+      rangeInput.oninput = handleRangeInput
 
-      canvasWidthEl.innerHTML = canvas.width
-      pointsLengthEl.innerHTML = stocks.length
+      let stocks = aapl
+
+      update()
+
+      function update() {
+        draw()
+        updateElements()
+      }
+
+      function handleRangeInput({ target: { value } }) {
+        stocks = simplify(aapl, aapl.length - value)
+        update()
+      }
+
+      function draw() {
+        clearCanvas(canvas)
+        useChart(canvas, stocks)
+      }
+
+      function updateElements() {
+        canvasWidthEl.innerHTML = canvas.width
+        pointsLengthEl.innerHTML = stocks.length
+      }
     </script>
   </body>
 </html>
