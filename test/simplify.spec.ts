@@ -45,6 +45,22 @@ describe('simplify', () => {
       expect(simplify(simplified).indexOf(points[1])).toEqual(-1)
     })
   })
+
+  describe('using the second argument', () => {
+    beforeAll(() => {
+      points = [
+        { x: 0, y: 0 },
+        { x: 1, y: 5 },
+        { x: 2, y: 2 },
+        { x: 3, y: 3 },
+      ]
+      simplified = simplify(points, 2)
+    })
+
+    it('removes the two least important points when 2 is passed as the second argument', () => {
+      expect(simplified.length).toEqual(points.length - 2)
+    })
+  })
 })
 
 describe('calculateArea', () => {
