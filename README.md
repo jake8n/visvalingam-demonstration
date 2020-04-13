@@ -1,1 +1,3 @@
-[Link](https://jakepatterson.github.io/visvalingam-demonstration/)
+# Line simplification using the Visvalingam algorithm
+
+https://jakepatterson.github.io/visvalingam-demonstration/
