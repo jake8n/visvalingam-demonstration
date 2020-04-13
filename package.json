@@ -7,8 +7,10 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
+    "lint": "prettier --check .",
     "lint:fix": "prettier --write .",
     "test": "jest",
+    "test:coverage": "jest --collectCoverage",
     "test:watch": "jest --watch"
   },
   "name": "visvalingam-demonstration",
