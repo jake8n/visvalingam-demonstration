@@ -35,44 +35,44 @@
     </div>
 
     <script type="module">
-      import aapl from './public/aapl.js'
-      import { simplify } from './public/simplify.js'
-      import { clearCanvas, getDomain, useChart } from './public/chart.js'
+      import aapl from "./public/aapl.js";
+      import { simplify } from "./public/simplify.js";
+      import { clearCanvas, getDomain, useChart } from "./public/chart.js";
 
-      const canvas = document.querySelector('#canvas')
-      const canvasWidthEl = document.querySelector('#canvas-width')
-      const pointsLengthEl = document.querySelector('#points-length')
-      const rangeInput = document.querySelector('#range')
+      const canvas = document.querySelector("#canvas");
+      const canvasWidthEl = document.querySelector("#canvas-width");
+      const pointsLengthEl = document.querySelector("#points-length");
+      const rangeInput = document.querySelector("#range");
 
-      rangeInput.min = 2
-      rangeInput.max = aapl.length
-      rangeInput.value = aapl.length
-      rangeInput.oninput = handleRangeInput
+      rangeInput.min = 2;
+      rangeInput.max = aapl.length;
+      rangeInput.value = aapl.length;
+      rangeInput.oninput = handleRangeInput;
 
-      let stocks = aapl
-      const xDomain = getDomain(aapl, 'x')
-      const yDomain = getDomain(aapl, 'y')
+      let stocks = aapl;
+      const xDomain = getDomain(aapl, "x");
+      const yDomain = getDomain(aapl, "y");
 
-      update()
+      update();
 
       function update() {
-        draw()
-        updateElements()
+        draw();
+        updateElements();
       }
 
       function handleRangeInput({ target: { value } }) {
-        stocks = simplify(aapl, aapl.length - value)
-        update()
+        stocks = simplify(aapl, aapl.length - value);
+        update();
       }
 
       function draw() {
-        clearCanvas(canvas)
-        useChart(canvas, stocks, xDomain, yDomain)
+        clearCanvas(canvas);
+        useChart(canvas, stocks, xDomain, yDomain);
       }
 
       function updateElements() {
-        canvasWidthEl.innerHTML = canvas.width
-        pointsLengthEl.innerHTML = stocks.length
+        canvasWidthEl.innerHTML = canvas.width;
+        pointsLengthEl.innerHTML = stocks.length;
       }
     </script>
   </body>

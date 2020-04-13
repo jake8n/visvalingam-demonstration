@@ -1,26 +1,14 @@
-import typescript from 'rollup-plugin-typescript2'
+import typescript from "rollup-plugin-typescript2";
 
-const plugins = [typescript()]
+const plugins = [typescript()];
 
-export default [
-  {
-    input: 'src/simplify.ts',
+export default ["simplify", "chart"].map((module) => ({
+  input: `src/${module}.ts`,
 
-    output: {
-      file: 'public/simplify.js',
-      format: 'esm',
-    },
-
-    plugins,
+  output: {
+    file: `public/${module}.js`,
+    format: "esm",
   },
-  {
-    input: 'src/chart.ts',
 
-    output: {
-      file: 'public/chart.js',
-      format: 'esm',
-    },
-
-    plugins,
-  },
-]
+  plugins,
+}));
